@@ -1,0 +1,8 @@
+flask
+flask-cors
+Pyrebase4
+firebase-admin
+google-generativeai
+requests
+gunicorn
+cachecontrol

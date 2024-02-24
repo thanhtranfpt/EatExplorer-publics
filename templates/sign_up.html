@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - EatExplorer</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico')}}" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            margin-top: 10px;
+        }
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng Ký Tài Khoản</h2>
+        <p id="result"></p>
+        <form action="/sign-up" method="post">
+            <div class="form-group">
+                <label for="fullname">Họ và Tên:</label>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="form-group">
+                <label for="username">Tên người dùng:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Mật khẩu:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Năm sinh:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label>Tình trạng sức khỏe hiện tại:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="health_condition[]" value="tiểu đường"> Tiểu đường</label>
+                    <label><input type="checkbox" name="health_condition[]" value="mỡ máu"> Mỡ máu</label>
+                    <label><input type="checkbox" name="health_condition[]" value="tim mạch"> Tim mạch</label>
+                    <label><input type="checkbox" name="health_condition[]" value="thoái hóa đốt sống"> Thoái hóa đốt sống</label>
+                    <label><input type="checkbox" name="health_condition[]" value="đau dây thần kinh"> Đau dây thần kinh</label>
+                    <label><input type="checkbox" name="health_condition[]" value="gút"> Gút</label>
+                    <label><input type="checkbox" name="health_condition[]" value="gan nhiễm mỡ"> Gan nhiễm mỡ</label>
+                    <label><input type="checkbox" name="health_condition[]" value="trĩ"> Trĩ</label>
+                    <label><input type="checkbox" name="health_condition[]" value="rối loạn tiêu hóa"> Rối loạn tiêu hóa</label>
+                    <!-- Thêm các checkbox khác tại đây -->
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Đăng ký</button>
+        </form>
+    </div>
+
+    <script>
+        result_elem = document.getElementById('result');
+    </script>
+
+    {% if sign_up_status == 1 %}
+    <script>
+        result_elem.style.color = 'green';
+        result_elem.textContent = '{{ message }}';
+        window.location.href = '{{ redirect_url }}';
+    </script>
+    {% elif sign_up_status == 0 %}
+    <script>
+        result_elem.style.color = 'red';
+        result_elem.textContent = '{{ message }}';
+    </script>
+    {% endif %}
+</body>
+</html>

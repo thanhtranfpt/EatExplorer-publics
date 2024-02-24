@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - EatExplorer</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico')}}" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+        .login-container {
+            width: 90%; /* Mặc định chiếm 90% */
+            max-width: 320px; /* Tối đa 320px */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h2 {
+            text-align: center;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .login-container input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+        .login-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        @media screen and (min-width: 600px) {
+            /* Dành cho thiết bị có chiều rộng lớn hơn hoặc bằng 600px */
+            .login-container {
+                width: 80%; /* Form chiếm 80% của chiều rộng */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Đăng nhập</h2>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Tên người dùng" required>
+            <input type="password" name="password" placeholder="Mật khẩu" required>
+            <input type="submit" value="Đăng nhập">
+        </form>
+
+        <button class="sign-up-btn" onclick="window.location.href='/sign-up'">Đăng ký</button>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        message_elem = document.getElementById('message');
+    </script>
+
+    {% if login_status == 1 %}
+    <script>
+        message_elem.style.color = 'green';
+        message_elem.textContent = "{{ message }}";
+        window.location.href = "{{ redirect_url }}";
+    </script>
+    {% elif login_status == 0 %}
+    <script>
+        message_elem.style.color = 'red';
+        message_elem.textContent = "{{ message }}";
+    </script>
+    {% endif %}
+</body>
+</html>

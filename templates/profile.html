@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin người dùng</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico')}}" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .person-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .person-info img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .hobbies {
+            margin-top: 10px;
+        }
+        .hobbies ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .hobbies ul li {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 15px;
+            background-color: #f0f0f0;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hồ sơ của tôi</h1>
+    <div class="person-info">
+        <img src="{{ user['avatar_url'] }}" alt="Person Image">
+        <h2>{{ user['full_name'] }}</h2>
+        <p>Date of Birth: {{ user['dob'] }}</p> <!-- Example DOB -->
+        <div class="hobbies">
+            <h3>Tình trạng sức khỏe hiện tại</h3>
+            <ul>
+                {% for health_cond in user['health_conditions'] %}
+                <li>{{ health_cond }}</li>
+                {% endfor %}
+                <!-- <li>Hiking</li> -->
+                <!-- Add more here -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

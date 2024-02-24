@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - EatExplorer</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'img/favicon.ico')}}" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .user-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Add this line */
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .user-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #555;
+        }
+        .search-bar {
+            width: calc(100% - 40px);
+            padding: 12px;
+            margin: 20px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            background-color: white;
+            color: #666;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-bar::placeholder {
+            color: #999;
+        }
+        .search-bar:focus {
+            background-color: #e0e0e0;
+        }
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .result {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .result:hover {
+            transform: translateY(-5px);
+        }
+        .result img {
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            object-fit: cover;
+            height: 180px;
+        }
+        .result-content {
+            padding: 15px;
+        }
+        .result h3 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .result p {
+            margin: 8px 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Add style for the logout button */
+        .logout-button {
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+
+        /* Result Message */
+        #result-message {
+            margin-left: 5%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="user-container">
+        <img class="user-avatar" src="{{ user['avatar_url'] }}" alt="Avatar" onclick="window.location.href = '/my-profile'">
+        <span class="user-name" onclick="window.location.href = '/my-profile'" style="cursor: pointer;">Hi, {{ user['full_name'] }}!</span>
+        <!-- Add logout button here -->
+        <button class="logout-button" onclick="window.location.href = '/log-out'">Log Out</button>
+    </div>
+
+    <input type="text" class="search-bar" id="searchInput" placeholder="Bạn muốn ăn gì nào...">
+
+    <h2 id="result-message">{{ result_message }}</h2>
+
+    <div class="search-results">
+        {% for product in products %}
+        <div class="result" onclick="window.open('{{ product['link'] }}', '_blank')">
+            <img src="{{ product['image_url'] }}" alt="{{ product['image_alt'] }}">
+            <div class="result-content">
+                <h3>{{ product['name'] }}</h3>
+                <p>Nhà phân phối: {{ product['vendor'] }}</p>
+                <p>Mô Tả: {{ product['description'] }}</p>
+                <p>Giá: {{ product['price'] }}</p>
+                <p>Rating: {{ product['star'] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- <div class="result">
+            <img src="product2.jpg" alt="Product 2">
+            <div class="result-content">
+                <h3>Tên Sản Phẩm 2</h3>
+                <p>Nhà Sản Xuất: XYZ Company</p>
+                <p>Mô Tả: Mô tả sản phẩm 2</p>
+                <p>Giá: $15</p>
+                <p>Rating: 4.8</p>
+            </div>
+        </div> -->
+        <!-- Thêm các kết quả tìm kiếm khác tại đây -->
+    </div>
+
+    <script>
+        // Add event listener for the search input
+        document.getElementById('searchInput').addEventListener('keypress', function(event) {
+            // Check if the Enter key is pressed (keyCode 13)
+            if (event.keyCode === 13) {
+                // Call a function to handle the search action
+                // handleSearch();
+
+                var searchQuery = document.getElementById('searchInput').value;
+                window.location.href = '/search?query=' + searchQuery;
+            }
+        });
+
+        // Function to handle the search action
+        // function handleSearch() {
+        //     // Get the value from the search input
+        //     var searchQuery = document.getElementById('searchInput').value;
+
+        //     // Perform your search action here (e.g., send search query to server)
+
+        //     var data = {
+        //         searchQuery: searchQuery,
+        //         healthConditions: healthConditions
+        //     };
+
+        //     fetch('/search', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(data)
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log('Server response: ', data);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error: ', error);
+        //     });
+        // };
+    </script>
+</body>
+</html>
