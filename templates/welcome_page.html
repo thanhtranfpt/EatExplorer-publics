@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to EatExplorer</title>
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <style>
+    /* Add your CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f8f9fa;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .logo {
+      width: 100px;
+      height: auto;
+    }
+    .main-content {
+      padding: 20px;
+      text-align: center;
+    }
+    .image-carousel {
+      /* Add your image carousel CSS styles here */
+    }
+    .search-bar {
+      /* Add your search bar CSS styles here */
+    }
+    .btn {
+      /* Add your button CSS styles here */
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .why-choose {
+      /* Add your "Why Choose EatExplorer?" section CSS styles here */
+    }
+    .get-started {
+      /* Add your "Get Started" section CSS styles here */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/logo.jpg" alt="EatExplorer" class="logo">
+    <h1>Welcome to EatExplorer</h1>
+  </header>
+  <div class="main-content">
+    <h2>Discover New Culinary Experiences</h2>
+    <div class="image-carousel">
+      <!-- Image carousel HTML content here -->
+    </div>
+    <h2>Best Suited for Your Health</h2>
+    <div class="search-bar">
+      <!-- Search bar HTML content here -->
+    </div>
+    <a id="go-btn" href="https://eat-explorer.onrender.com/" class="btn" onclick="goToApp()">Explore Now</a>
+
+    <div id="wait-message" style="margin-top: 50px; display: none;">
+        <p>Do lượng truy cập đang tăng lên đáng kể, việc tải trang có thể mất một chút thời gian.</p>
+        <p>Bạn vui lòng đợi một chút nhé!</p>
+    </div>
+    <!-- <div class="why-choose">
+      <h2>Why Choose EatExplorer?</h2>
+      <ul>
+        <li>Explore a wide variety of restaurants and cuisines</li>
+        <li>Read reviews and ratings from fellow foodies</li>
+        <li>Easily book tables and make reservations</li>
+        <li>Discover hidden gems in your area</li>
+      </ul>
+      <img src="map.png" alt="Map" width="300">
+    </div>
+    <div class="get-started">
+      <h2>Get Started</h2>
+      <a href="#" class="btn">Sign Up</a>
+      <a href="#" class="btn">Log In</a>
+      <p>Already a member? <a href="#">Log In</a></p>
+    </div> -->
+  </div>
+
+  <script>
+    window.location.href = 'https://eat-explorer.onrender.com/';
+    function goToApp() {
+      setTimeout(function() {
+        document.getElementById('wait-message').style.display = 'block';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
